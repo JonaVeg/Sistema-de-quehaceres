@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Quehaceres</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Quehaceres</h1>
+
+        <!-- Select para seleccionar las tareas generales -->
+        <div class="mb-4">
+            <select id="task-select" class="form-control">
+                <option value="" disabled selected>Selecciona una tarea</option>
+                <option value="Barrer los pisos">Barrer los pisos</option>
+                <option value="Trapear los pisos">Trapear los pisos</option>
+                <option value="Sacudir muebles y superficies">Sacudir muebles y superficies</option>
+                <option value="Limpiar ventanas y espejos">Limpiar ventanas y espejos</option>
+                <option value="Lavar los platos">Lavar los platos</option>
+                <option value="Limpiar la nevera">Limpiar la nevera (refrigerador)</option>
+                <option value="Tirar la basura">Tirar la basura y reemplazar bolsas</option>
+                <option value="Limpiar el inodoro y el lavabo">Limpiar el inodoro y el lavabo</option>
+                <option value="Limpiar la ducha">Limpiar la ducha</option>
+                <option value="Limpiar el espejo">Limpiar el espejo</option>
+                <option value="Barrer la entrada">Barrer la entrada</option>
+                <option value="Sacar la basura">Sacar la basura</option>
+                <option value="Regar las plantas">Regar las plantas</option>
+                <option value="Alimentar y cuidar de las mascotas">Alimentar y cuidar de las mascotas</option>
+            </select>
+        </div>
+
+        <!-- Select para seleccionar la persona -->
+        <div class="mb-4">
+            <select id="person-select" class="form-control">
+                <option value="" disabled selected>Selecciona una persona</option>
+                <option value="jonathan">Jonathan</option>
+                <option value="santiago">Santiago</option>
+            </select>
+        </div>
+
+        <!-- Select para seleccionar el día -->
+        <div class="mb-4">
+            <select id="day-select" class="form-control">
+                <option value="" disabled selected>Selecciona un día</option>
+                <option value="monday">Lunes</option>
+                <option value="tuesday">Martes</option>
+                <option value="wednesday">Miércoles</option>
+                <option value="thursday">Jueves</option>
+                <option value="friday">Viernes</option>
+                <option value="saturday">Sábado</option>
+                <option value="sunday">Domingo</option>
+            </select>
+        </div>
+
+        <!-- Botón para asignar la tarea -->
+        <button id="assign-task" class="btn btn-primary mb-4">Asignar Tarea</button>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Tareas Asignadas Jonathan</th>
+                    <th>Tareas Asignadas Santiago</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Fila para el Lunes -->
+                <tr>
+                    <td>Lunes</td>
+                    <td><ul id="monday-tasks-jonathan" class="list-group"></ul></td>
+                    <td><ul id="monday-tasks-santiago" class="list-group"></ul></td>
+                </tr>
+                <!-- Repite la estructura para los demás días de la semana -->
+                <tr>
+                    <td>Martes</td>
+                    <td><ul id="tuesday-tasks-jonathan" class="list-group"></ul></td>
+                    <td><ul id="tuesday-tasks-santiago" class="list-group"></ul></td>
+                </tr>
+                <tr>
+                    <td>Miércoles</td>
+                    <td><ul id="wednesday-tasks-jonathan" class="list-group"></ul></td>
+                    <td><ul id="wednesday-tasks-santiago" class="list-group"></ul></td>
+                </tr>
+                <tr>
+                    <td>Jueves</td>
+                    <td><ul id="thursday-tasks-jonathan" class="list-group"></ul></td>
+                    <td><ul id="thursday-tasks-santiago" class="list-group"></ul></td>
+                </tr>
+                <tr>
+                    <td>Viernes</td>
+                    <td><ul id="friday-tasks-jonathan" class="list-group"></ul></td>
+                    <td><ul id="friday-tasks-santiago" class="list-group"></ul></td>
+                </tr>
+                <tr>
+                    <td>Sábado</td>
+                    <td><ul id="saturday-tasks-jonathan" class="list-group"></ul></td>
+                    <td><ul id="saturday-tasks-santiago" class="list-group"></ul></td>
+                </tr>
+                <tr>
+                    <td>Domingo</td>
+                    <td><ul id="sunday-tasks-jonathan" class="list-group"></ul></td>
+                    <td><ul id="sunday-tasks-santiago" class="list-group"></ul></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Carga de Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script personalizado -->
+    <script>
+        // Función para agregar una tarea a la lista
+        function addTaskToList(day, person, taskName) {
+            const taskList = document.getElementById(`${day}-tasks-${person}`);
+            if (taskList) { // Verificar que el elemento exista
+                const listItem = document.createElement('li');
+                listItem.textContent = taskName;
+                listItem.className = 'list-group-item';
+                taskList.appendChild(listItem);
+            } else {
+                console.error('No se encontró la lista de tareas para el día y persona seleccionados.');
+            }
+        }
+
+        // Manejar la asignación de tareas
+        document.getElementById('assign-task').addEventListener('click', function() {
+            const taskSelect = document.getElementById('task-select');
+            const personSelect = document.getElementById('person-select');
+            const daySelect = document.getElementById('day-select');
+
+            const selectedTask = taskSelect.value;
+            const selectedPerson = personSelect.value;
+            const selectedDay = daySelect.value;
+
+            if (selectedTask && selectedPerson && selectedDay) {
+                addTaskToList(selectedDay, selectedPerson, selectedTask);
+                taskSelect.value = ''; // Restablecer el menú desplegable de tareas
+                personSelect.value = ''; // Restablecer el menú desplegable de personas
+                daySelect.value = ''; // Restablecer el menú desplegable de días
+            } else {
+                alert('Por favor, selecciona una tarea, una persona y un día.');
+            }
+        });
+    </script>
+</body>
+</html>
