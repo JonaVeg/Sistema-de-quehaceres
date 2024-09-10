@@ -1,28 +1,26 @@
-//Nuevas Funciones 
 document.getElementById('assign-task').addEventListener('click', () => {
     const task = document.getElementById('task-select').value;
     const person = document.getElementById('person-select').value;
     const day = document.getElementById('day-select').value;
 
-    // Solo mandamos el mensaje si la persona es Jonathan
+    // Mandamos el mensaje a la persona correspondiente
     if (person === 'jonathan') {
-        mandarMensaje(task, day);
+        mandarMensaje('522218951103', task, day);  // Número de Jonathan
+    } else if (person === 'santiago') {
+        mandarMensaje('522212002440', task, day);  // Número de Santiago
     }
 });
 
-function mandarMensaje(task, day) {
+function mandarMensaje(numeroTelefono, task, day) {
     console.log('La función mandarMensaje() se está ejecutando correctamente.');
 
-    var numeroTelefono = '522218951103'; // Número de Jonathan
-    var mensaje = encodeURIComponent(`Hola Jonathan, se te ha asignado la siguiente tarea: ${task} para el día ${day}.`);
+    var mensaje = encodeURIComponent(`Hola, se te ha asignado la siguiente tarea: ${task} para el día ${day}.`);
     var urlWhatsApp = 'https://wa.me/' + numeroTelefono + '?text=' + mensaje;
 
     setTimeout(function() {
         window.location.href = urlWhatsApp;
     }, 500); // Espera de 500ms antes de redirigir
 }
-
-
 
 
 
