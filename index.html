@@ -73,6 +73,8 @@ td {
     <div class="container mt-5">
         <h1 class="text-center mb-4">Lista de Quehaceres</h1>
 
+        <h1>hola</h1>
+
         <!-- Select para seleccionar las tareas generales -->
         <div class="mb-4">
             <select id="task-select" class="form-control">
@@ -176,6 +178,22 @@ td {
             </tbody>
         </table>
     </div>
+
+
+  
+      <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+
+      <script>
+        const beamsClient = new PusherPushNotifications.Client({
+          instanceId: '8253006f-1024-407d-ba18-01ea5aee4eea',
+        });
+      
+        beamsClient.start()
+          .then(() => beamsClient.addDeviceInterest('hello'))
+          .then(() => console.log('Successfully registered and subscribed!'))
+          .catch(console.error);
+      </script>
+      
 
     <!-- Carga de Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -1,3 +1,34 @@
+//Nuevas Funciones 
+document.getElementById('assign-task').addEventListener('click', () => {
+    const task = document.getElementById('task-select').value;
+    const person = document.getElementById('person-select').value;
+    const day = document.getElementById('day-select').value;
+
+    // Solo mandamos el mensaje si la persona es Jonathan
+    if (person === 'jonathan') {
+        mandarMensaje(task, day);
+    }
+});
+
+function mandarMensaje(task, day) {
+    console.log('La función mandarMensaje() se está ejecutando correctamente.');
+
+    var numeroTelefono = '522218951103'; // Número de Jonathan
+    var mensaje = encodeURIComponent(`Hola Jonathan, se te ha asignado la siguiente tarea: ${task} para el día ${day}.`);
+    var urlWhatsApp = 'https://wa.me/' + numeroTelefono + '?text=' + mensaje;
+
+    setTimeout(function() {
+        window.location.href = urlWhatsApp;
+    }, 500); // Espera de 500ms antes de redirigir
+}
+
+
+
+
+
+
+
+
 // Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyDOhPxir8yd3Dto8bmxTRLILzfdWdnjqig",
@@ -109,7 +140,7 @@ function deleteTasks(day) {
 
 
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker.js' in navigator) {
     navigator.serviceWorker.register('/firebase-messaging-sw.js')
     .then((registration) => {
         console.log('Service Worker registrado correctamente:', registration);
