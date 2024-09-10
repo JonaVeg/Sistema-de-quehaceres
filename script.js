@@ -14,7 +14,8 @@ document.getElementById('assign-task').addEventListener('click', () => {
 function mandarMensaje(numeroTelefono, task, day) {
     console.log('La función mandarMensaje() se está ejecutando correctamente.');
 
-    var mensaje = encodeURIComponent(`Hola, se te ha asignado la siguiente tarea: ${task} para el día ${day} Visita el link para ver tus tareas del dia https://21automatizacion.netlify.app/.`);
+    var url = encodeURIComponent('https://21automatizacion.netlify.app/');
+    var mensaje = encodeURIComponent(`Hola, se te ha asignado la siguiente tarea: ${task} para el día ${day}. Visita el link para ver tus tareas del día: ${url}`);
     var urlWhatsApp = 'https://wa.me/' + numeroTelefono + '?text=' + mensaje;
 
     setTimeout(function() {
